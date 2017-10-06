@@ -20,3 +20,10 @@
 ### 2-6_在事件中绑定$scope对象的方法
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-6.PNG)
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-6-1.PNG)
+### 2-7_添加带参数的$scope方法
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-7-1.PNG)
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-7-2.PNG)
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-7-3.PNG)
+### 2-8_$scope对象方法和属性的继承
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-8-1.PNG)
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-8-2.PNG)
