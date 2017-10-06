@@ -11,3 +11,12 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-1.PNG)
 ### 2-2_$window窗口在表达式中的使用
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-2.PNG)
+### 2-3_Angular表达式的容错性
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-3.PNG)
+### 2-4_控制器初始化$scope对象
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-4.PNG)
+### 2-5_控制器初始化$scope对象
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-5.PNG)
+### 2-6_在事件中绑定$scope对象的方法
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-6.PNG)
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-6-1.PNG)
