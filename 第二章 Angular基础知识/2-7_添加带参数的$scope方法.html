@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="a2_7" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加带参数的$scope方法</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div ng-controller="c2_7">
+    <span class="show">{{text}}</span>
+    <input id="btnShow" type="button" ng-click="click_show();" value="显示"/>
+    <input id="btnPara" type="button" ng-click="click_para('单击了带参数按钮!');" value="带参数显示"/>
+</div>
+<script type="text/javascript">
+    var a2_7=angular.module('a2_7',[]);
+    a2_7.controller('c2_7',['$scope',function ($scope) {
+        $scope.text='Hello! Angular';
+        $scope.click_show=function () {
+            $scope.text="单击后显示的内容!";
+        };
+        $scope.click_para=function (ptext) {
+            $scope.text=ptext;
+        };
+    }]);
+</script>
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，在构建控制器代码时，新添加一个名为"click_para"的带参方法，在该方法中将形参ptext的值设置为$scope对象"text"的属性值
+；而在页面中通过Angular的事件处理器，将新添加的方法与另外一个<button>元素的click事件相绑定。在绑定时，将字符串常量"单击了带参数按钮!"作为
+调用方法时需要传递的实参。
+    当单击<button>元素时便触发了click事件，在事件中调用"click_para"方法，由形参ptext接收传来的字符串常量，并将该常量作为$scope对象"text"
+的属性值。由于页面中的<span>元素已通过双花括号中的表达式绑定了"text"属性值，因此，在控制器中$scope对象的"text"属性值变化后，被绑定的<span>
+元素显示内容将自动同步更新，最终将更新的内容显示在页面中。
+-->
