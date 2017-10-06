@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="a2_4" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器初始化$scope对象</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div ng-controller="c2_4">
+    <span>{{text}}</span>
+</div>
+<script type="text/javascript">
+    var a2_4=angular.module('a2_4',[]);
+    a2_4.controller('c2_4',['$scope',function ($scope) {
+        $scope.text="Hello! Angular";
+    }]);
+</script>
+
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，自定义控制器函数的创建由全局方式改为在Angular模块下使用controller方式
+这种方式更加强调页面是一个整体的应用，控制器可以对应应用中的某一个模块进行管理。相对于全局方式
+下的定义，该方式的扩展性和针对性更强。
+    在本市例中，首先定义了一个名为"a2_4"的Angular模块，然后通过下列代码，创建了一个名为
+"c2_4"的控制器。
+    a2_4.controller('c2_4',['$scope',function($scope){
+        ...代码块
+    }]);
+    在上述的代码中，采用内联注入的方式声明"c2_4"控制器的构建依赖Angular中的$scope对象，
+即在构建控制器时，Angular会自动将$scope对象作为参数注入到控制器中。
+    在构建控制器函数时，虽然$scope对象已经自动注入，但还是需要对他进行初始化。初始化的
+方法是向该对象添加属性，在本示例的代码如下。
+    $scope.text='Hello! Angular';
+    采用上述方式也可以添加多个属性，被添加的这些属性在控制器所管理的所有DOM元素中都可以采用
+数据绑定的方式进行访问。例如，对于下列代码：
+    <div ng-controller="c2_4">
+        <span>{{text}}<span>
+    </div>
+    通过元素的"ng-contruller"属性值指定控制器函数的名称，表明该元素中的全部DOM节点都受
+控制器管理，然后，采用双花括号的方式绑定控制器的数据，从而最终实现View层数据展示的功能。
+-->

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个计算功能的Angular程序</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<h3>计算并显示下列两个数值的和</h3>
+1.98 + 2.98 = {{ 1.98 + 2.98 | number:0}}
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，除了在<html>元素中添加"ng-app"属性，表明整个页面代码都有Angular
+框架进行管理外，在使用双花括号插入数值时，先通过加号"+"运算符计算出两个数值的结果并返回
+给页面，然后，在计算数值时使用了一个"|"管道符号，这个符号在Angular中表示调用过滤器格式
+化数据，它的调用方法如下。
+    {{exp | filtername : para1:...paraN}}
+-->

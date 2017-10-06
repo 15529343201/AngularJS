@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个绑定多个页面元素的Angular程序</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<h3>以列表的方式显示绑定的多项数据</h3>
+<div ng-controller="stucontroller">
+    <ul>
+        <li ng-repeat="stu in data">
+            <span>{{stu.name}}</span>
+            <span>{{stu.sex}}</span>
+            <span>{{stu.age}}</span>
+            <span>{{stu.score}}</span>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    function stucontroller($scope) {
+        $scope.data = [
+            { name: "张明明",sex:"女",age:24,score:95},
+            { name: "李清思",sex:"女",age:27,score:87},
+            { name: "刘小华",sex:"男",age:28,score:86},
+            { name: "陈忠忠",sex:"男",age:23,score:97}
+        ];
+    }
+</script>
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，除了<li>元素中声明的控制器管理类"stucontroller"之外，还在<li>
+元素中添加了一个名为"ng-repeat"的属性，该属性是Angular的一个新指令，表示复制的意思，
+即对于"data"数组中的每个元素，都会将<li>元素中的结构复制一次，在每次复制使用时，再将
+“stu”的属性值赋予复制的<li>中各个元素。因此，“data”数组中的数量与复制后的<li>元素的
+数量是一致的，并且在每次复制成功之后，都将数组中的各个元素内容通过双花括号的方式插入到
+<li>元素中，从而实现了在<li>元素中显示全部"data"数组内容的功能。
+    而当"data"数组中的源数据发生变化后，使用双花括号绑定的数据内容也将会随之发生变化
+，而这些变化，在Angular中都是自动完成的，无须注册任何监测的事件
+-->

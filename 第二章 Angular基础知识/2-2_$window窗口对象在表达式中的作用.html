@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$window窗口对象在表达式中的作用</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div ng-controller="c2_2">
+    <input type="text" ng-model="text"/>
+    <button ng-click="show()">显示</button>
+</div>
+<script type="text/javascript">
+    function c2_2($window,$scope) {
+        $scope.text="";
+        $scope.show=function () {
+            $window.alert("您输入的内容是："+$scope.text);
+        }
+    }
+</script>
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，在自定义控制器函数c2_2时，添加了一个$window对象，用于取代全局性
+的window对象。在使用时，可以像访问window对象一样，调用$window对象中各类方法或属性，如
+alert,confirm等。另外，在代码中，由于文本框与$scope的"text"属性进行了数据绑定，因此，
+只要文本框输入的内容发生变化，对应的$scope.text属性值也随之改变，所以，弹出的窗口能及时
+动态显示在文本框中输入的内容值。
+-->

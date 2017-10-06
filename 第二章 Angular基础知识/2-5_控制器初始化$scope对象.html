@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="a2_5" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器初始化$scope对象</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div ng-controller="c2_5">
+    <span class="show">{{span_show()}}</span>
+</div>
+<script type="text/javascript">
+    var a2_5=angular.module('a2_5',[]);
+    a2_5.controller('c2_5',['$scope',function ($scope) {
+        $scope.text="Hello! Angular";
+        $scope.span_show=function () {
+            $scope.text="欢迎来到Angular的精彩世界!";
+            return $scope.text;
+        };
+    }]);
+</script>
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，在构建名为"c2_5"的控制器时，除添加"text"属性外，还向$scope对象
+添加了一个名为"span_show"的方法。该方法是一个自定义的函数，在函数中先重新设置了"$scope"
+对象的"text"的属性值，再通过return语句返回重置后的属性值。
+    为了能在页面中执行控制器中定义的"span_show"方法，在双花括号中以表达式的方式直接调用
+方法名称，因为调用该方法将返回重置后的$scope对象的"text"属性值，所以，在页面的<span>元
+素中，显示$scope对象被重置后的字符内容。
+-->
+
+
