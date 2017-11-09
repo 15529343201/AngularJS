@@ -33,3 +33,9 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-10.PNG)
 ### 2-11_添加元素样式
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-11.PNG)
+### 2-12_控制元素的隐藏和显示状态
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-12.PNG)
+### 2-13_表单基本验证功能
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-13.PNG)
+### 2-14_表单中的checkbox和radio控件
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-14.PNG)
