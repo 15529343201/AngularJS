@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="a2_10" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用指令复制元素</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--在构建模板内容的过程中，有时需要反复将不同的数据加载到一个元素中，例如，通过<li>元素绑定一个数组的各成员。此时，可以使用"ng-repeat"
+指令，他的功能是根据绑定数组成员的数量，复制页面中被绑定的<li>元素，并在复制过程中添加元素相应的属性和方法，通过这种方式，实现数组数据与元素
+绑定的过程。
+    在使用"ng-repeat"复制元素的过程中，还提供了几个非常使用的专有变量，可以通过这些变量来处理显示数据时的各种状态，这些变量的功能分别如下:
+    $first,该变量表示记录是否是首条，如果是返回true，否则返回false
+    $last,该变量表示记录是否是尾条，如果是返回true，否则返回false
+    $middle,该变量表示记录是否是中间条，如果是true，否则返回false
+    $index,该变量表示记录的索引号，其对应的值从0开始。
+-->
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type: none;
+            width:400px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul li span{
+            width:50px;
+            float:left;
+            padding:0px 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div ng-controller="c2_10">
+    <ul>
+        <li>
+            <span>序号</span>
+            <span>姓名</span>
+            <span>性别</span>
+            <span>是否首条</span>
+            <span>是否尾条</span>
+        </li>
+        <li ng-repeat="stu in data">
+            <span>{{$index+1}}</span>
+            <span>{{stu.name}}</span>
+            <span>{{stu.sex}}</span>
+            <span>{{$first?'是':'否'}}</span>
+            <span>{{$last?'是':'否'}}</span>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var a2_10=angular.module('a2_10',[]);
+    a2_10.controller('c2_10',['$scope',function ($scope) {
+        $scope.data=[
+            {name:"张明明",sex:"女"},
+            {name:"李清思",sex:"女"},
+            {name:"刘小华",sex:"男"},
+            {name:"陈忠忠",sex:"男"}
+        ];
+    }]);
+</script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,首先,在对应页面的控制器代码中,以$scope属性的方式添加了一个名为"data"数组,用作页面<li>元素绑定的数据源;然后,在页面中
+添加<ul>元素,并在该元素中再添加两个<li>元素,第一个用于标题显示,第二个用于绑定"data"数组内容。
+    在用于绑定"data"数组内容的第二个<li>元素中,调用Angular中的"ng-repeat"指令完成数据与页面元素的绑定。在绑定过程中,Angular先遍历"data"
+数组,在遍历时复制一份<li>元素,并通过"stu"对象将控制器中的属性和方法添加至该元素中,在遍历完成后便生成了与数组成员数量对应的<li>元素,并且
+在这些元素中也添加了需要显示地内容和方法,从而最终实现以列表方式显示集合数据的功能。
+    再通过"ng-repeat"指令复制元素过程中,可以通过表达式的方式直接调用Angular提供的几个专用的变量$first,$middle,$last和$index。由于
+这些变量均返回布尔值,因此,可以根据返回的布尔值,再借助"?:"运算符转成中文显示的文字内容,实现的过程如本实例中的源码表示。
+-->

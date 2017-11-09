@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="a2_9" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构建模板内容</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/ng-template" id="tplbase">
+    姓名：{{name}},<br />邮箱：{{email}}
+</script>
+<div ng-include src="'tplbase'" ng-controller="c2_9"></div>
+<script type="text/javascript">
+    var a2_9=angular.module('a2_9',[]);
+    a2_9.controller('c2_9',['$scope',function ($scope) {
+        $scope.name='陶国荣';
+        $scope.email='tao_guo_rong@163.com';
+    }]);
+</script>
+</body>
+</html>
+<!--源码分析：
+    在本示例的代码中，先添加一个"type"类型为"text/ng-template"的<script>元素，并在该元素中通过双花括号的方式绑定控制器中需要显示
+的两项数据。由于该元素定义的是Angular类型的模板，因此，它可以直接使用Angular中的表达式进行数据绑定，除此之外，还可以在模板中绑定元素
+的各类事件。
+    在完成模板内容构建之后，新添加一个<div>元素，用来导入模板内容。在导入时，首先添加"ng-include"指令，声明该元素的内容来源于其他
+模板；然后再添加"src"属性，指定对应模块的名称，即ID号或者模板文件名称。需要注意的是："src"属性值是一个表达式，它可以时$scope中的
+属性名，也可以是普通字符串。如果是后者，必须添加引号。
+-->

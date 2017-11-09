@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a2_11">
+<head>
+    <meta charset="UTF-8">
+    <title>添加元素样式</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+<!--添加元素样式
+    (1)直接绑定值为CSS类别名称的$scope对象属性
+    这种方式的操作非常简单,先在控制器中添加一个值为CSS类别名称的属性,然后在页面元素的class或ng-class属性值中,通过双花括号方式绑定属性名
+即可,如以下代码。
+    $scope.red="red";
+    上述代码表示在控制器中添加了一个名为"red"的属性,它的属性值是名为"red"的CSS类别名。再添加完"red"属性后,在页面中可以通过下列代码
+进行调用。
+    <div ng-class="{{red}}"></div>
+    等价于下列代码:
+    <div class="{{red}}"></div>
+    这种方式操作起来虽然简单,但在控制器中定义CSS类别名称,并不是Angular所提倡的,我们在开发Angular应用时,尽量保证控制器的代码都是处理
+业务逻辑,并不涉及页面元素。
+    (2)以字符串数组方式选择性添加CSS类别名称
+    这种方式将根据控制中一个布尔类型的属性值来决定页面中元素添加的CSS样式名,当该属性值为true时,添加一个CSS样式名,当属性值为false值时,
+添加另外一个CSS样式名。下列代码添加一个名为"blnfocus"属性,由它决定页面中<div>元素的样式。
+    $scope.blnfocus=true;
+    接下来在页面中的<div>元素中添加ng-class属性,并在属性值中通过字符串数组方式来添加CSS类别名称,代码如下。
+    <div ng-class="{true:'red',false:'green'}[blnfocus]"</div>
+    在上述代码中,<div>的CSS样式取决于"blnfocus"属性值,当该值为true时,添加"red"样式名,当该值为false时,添加"green"样式名。这种方式
+只能在两种样式中选择一种,并且{}和[]顺序不可颠倒。在{}中设置可选择的两种样式名称,在[]中放置控制样式的属性名。
+    (3)通过定义key/value对象的方式来添加多个CSS类别名称
+    与前面介绍的两种添加CSS类别名的方法相比,第三种方法的功能要强大很多,它可以根据控制显示样式的属性值添加多个样式名。例如,先添加两个用于
+控制样式显示地"a"和"b"属性,这两个属性的类型均为布尔型,代码如下。
+    $scope.a=false;
+    $scope.b=true;
+    接下来在页面的<div>元素中,添加ng-class属性。再设置属性值时,通过定义key/value对象的方式来添加多个CSS样式名,代码如下。
+    <div ng-class="{'red':a,'green':b}"></div>
+    在上述ng-class属性值设置过程中,样式名"red"和"green"分别为"key"值,属性值"a"和"b"分别为对应的"value"值。当"value"属性值为true
+时,则添加对应的"key"即CSS样式名。因此,这种方式可以实现添加多种CSS样式名称,适合在处理复杂样式时使用。
+    此外,在Angular中,还有另外两个用于添加样式的页面指令,分别为"ng-class-odd"和"ng-class-even",这两个样式指令是专用于以列表方式显示数据,
+对应奇数行和偶数行的样式。
+-->
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type: none;
+            width:408px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul .odd{
+            color:#0026ff;
+        }
+        ul .even{
+            color:#ff0000;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:50px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .focus{
+            background-color: #cccccc;
+        }
+    </style>
+
+</head>
+<body>
+<div ng-controller="c2_11">
+    <ul>
+        <li ng-class="{{bold}}">
+            <span>序号</span>
+            <span>姓名</span>
+            <span>性别</span>
+            <span>是否首条</span>
+            <span>是否尾条</span>
+        </li>
+        <li ng-class-odd="'odd'"
+            ng-class-even="'even'"
+            ng-repeat="stu in data"
+            ng-click='li_click($index)'
+            ng-class='{focus:$index==focus}'>
+            <span>{{$index+1}}</span>
+            <span>{{stu.name}}</span>
+            <span>{{stu.sex}}</span>
+            <span>{{$first?'是':'否'}}</span>
+            <span>{{$last?'是':'否'}}</span>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var a2_11=angular.module('a2_11',[]);
+    a2_11.controller('c2_11',['$scope',function ($scope) {
+        $scope.bold="bold";
+        $scope.li_click=function (i) {
+            $scope.focus=i;
+        }
+        $scope.data=[
+            {name:"张明明",sex:"女"},
+            {name:"李清思",sex:"女"},
+            {name:"刘小华",sex:"男"},
+            {name:"陈忠忠",sex:"男"}
+        ];
+    }]);
+</script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,首次定义了名称为"odd","even","bold"和"focus"的4个样式,分别用于隔行时的两种字体色,标题栏字体变粗和单击某行时
+的背景色。
+    其次,在实例的控制器代码中,除添加"data"数组集合外,再添加了一个"bold"属性,用于指定加粗显示字体时的样式名。另外,还添加了一个带参数的
+"li_click"方法,当调用该方法时,将"focus"属性值设为传入参数值。
+    再有,在市里的页面代码中,先通过双花括号方式将第一个<li>元素的"ng-class"值与"bold"属性值绑定,由于该值指定的是一个加粗时的样式名,
+因此,在绑定后,<li>元素中的字体变粗;然后,使用"ng-class-odd"和"ng-class-even"样式指令分别绑定奇数和偶数行的样式名,实现隔行换色的功能;
+最后,在<li>元素的单击事件中,将执行$scope对象中添加的"li_click()"方法,在该方法中将"$index"(行号值)作为实参传给方法,并且将"focus"属性
+值设置为"$index"值。因此,当单击某行<li>元素时,"focus"属性值将变为相应的"$index"值。
+    最后,在示例页面<li>元素的"ng-class"样式指令值中通过key/value对象的方式指定该元素需要添加的样式。由于单击<li>元素时,"$index"变量值
+和"focus"属性值相同,也就是说,表达式"$index==focus"的返回值为true。因此,"ng-class"样式指令值变为"focus",最终实现当单击<li>元素时,
+添加背景样式的页面效果。
+-->
