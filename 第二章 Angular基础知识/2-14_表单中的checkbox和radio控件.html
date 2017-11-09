@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a2_14">
+<head>
+    <meta charset="UTF-8">
+    <title>表单中的checkbox和radio控件</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        div{
+            margin:8px 0px;
+        }
+    </style>
+</head>
+<body>
+    <form name="temp_form" ng-submit="save()" ng-controller="c2_14">
+        <div>
+            <input type="checkbox" ng-model="a" ng-true-value="同意" ng-false-value="不同意"/>
+        </div>
+        <div>
+            性别:
+            <input type="radio" ng-model="b" value="男"/>男
+            <input type="radio" ng-model="b" value="女"/>女
+        </div>
+        <input type="submit" value="提交"/>
+        <div>{{c}}</div>
+    </form>
+    <script type="text/javascript">
+        var a2_14=angular.module('a2_14',[]);
+        a2_14.controller('c2_14',['$scope',function ($scope) {
+            $scope.a="同意";
+            $scope.b="男";
+            $scope.save=function () {
+                $scope.c="您选择的是:"+$scope.a+"和"+$scope.b;
+            }
+        }]);
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,当构建应用的控制器代码时,先向$scope对象添加"a"和"b"两个属性,分别用于表单中checkbox控件和radio控件的数据
+绑定。同时,这两个属性的初始值决定控件元素显示的初始化状态。
+    然后,在页面代码中,当添加"checkbox"类型控件时,除了添加"ng-model"指令绑定控制器的属性外,还添加了"ng-true-value"和"ng-false-value"
+指令,前者表示选中时返回的值,后者表示未选中时返回的值。另外,在添加"radio"类型控件时,只要将多个控件的"ng-model"指令值设为相同,
+这些"radio"类型控件就只有一个选中时的值,并且,当一个选中时,其他控件自动变成非选中的状态。
+    最后,当单击"提交"按钮时,将执行控制器中的"save"方法。在该方法中,将绑定控件后的"a"和"b"属性赋予新添加的属性"c",而"c"属性
+又通过双花括号的方式被绑定在<div>元素中,因此,在单击"提交"按钮后,控件选中的值将显示在<div>元素中。
+-->
