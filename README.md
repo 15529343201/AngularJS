@@ -27,3 +27,9 @@
 ### 2-8_$scope对象方法和属性的继承
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-8-1.PNG)
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-8-2.PNG)
+### 2-9_构建模板内容
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-9.PNG)
+### 2-10_使用指令复制元素
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-10.PNG)
+### 2-11_添加元素样式
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-11.PNG)
