@@ -39,3 +39,5 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-13.PNG)
 ### 2-14_表单中的checkbox和radio控件
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-14.PNG)
+### 2-15_表单中的select控件
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-15.PNG)
