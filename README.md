@@ -43,3 +43,19 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-15.PNG)
 ### 3-1_排序方式过滤
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-1.PNG)
+### 3-2_匹配方式过滤
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-2.PNG)
+### 3-3_自定义过滤器
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-3.PNG)
+### 3-4_表头排序
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-4.PNG)
+### 3-5_字符查找
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-5.PNG)
+### 3-6_$watch方法
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-6.PNG)
+### 3-7_作为数据模型的作用域
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-7.PNG)
+### 3-8_作用域层级
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-8.PNG)
+### 3-9_作用域事件的传播
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-9.PNG)
