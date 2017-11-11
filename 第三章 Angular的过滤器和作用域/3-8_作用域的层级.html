@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_8">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域的层级</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type:none;
+            width:408px;
+            margin:10px 0px;
+            padding:0px;
+        }
+        ul .ng-scope{
+            background-color: #eee;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:52px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .school{
+            float:right;
+            margin-right:80px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c3_8_school">
+        <ul ng-controller="c3_8_class_1">
+            <li ng-class="{{school}}">{{s_name}}{{c_name}}</li>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>英语</span>
+                <span>数学</span>
+            </li>
+            <li ng-repeat="stu in data">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.english}}</span>
+                <span>{{stu.maths}}</span>
+            </li>
+        </ul>
+        <ul ng-controller="c3_8_class_2">
+            <li ng-class="{{school}}">{{s_name}}{{c_name}}</li>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>英语</span>
+                <span>数学</span>
+            </li>
+            <li ng-repeat="stu in data">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.english}}</span>
+                <span>{{stu.maths}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var a3_8=angular.module('a3_8',[]);
+        a3_8.controller('c3_8_school',['$scope',function ($scope) {
+            $scope.s_name="北城区试验小学";
+            $scope.bold="bold";
+            $scope.school="school";
+        }]);
+        a3_8.controller('c3_8_class_1',['$scope',function ($scope) {
+           $scope.c_name="三年级(1)班";
+           $scope.data=[
+               {name:"张明明",sex:"女",english:85,maths:95},
+               {name:"李清思",sex:"女",english:97,maths:87}
+           ];
+        }]);
+        a3_8.controller('c3_8_class_2',['$scope',function ($scope) {
+            $scope.c_name="三年级(2)班";
+            $scope.data=[
+                {name:"刘小华",sex:"男",english:97,maths:86},
+                {name:"陈忠忠",sex:"男",english:87,maths:88}
+            ];
+        }]);
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的控制器代码中,分别定义3个控制器函数"c3_8_school","c3_8_class_1"和"c3_8_class_2",而在页面中通过向元素属性添加
+"ng-controller"指令来绑定这些函数,根据这些添加指令元素的DOM层次关系,便形成了作用域的层级关系。
+    在本示例作用域的层级关系中,"c3_8_school"控制器属于父级,其余两个控制器属于子级,隶属于父级,因此,它们可以直接继承父级作用域
+中通过"$scope"对象添加的属性或方法,即"s_name""bold"和"school"属性,如果在父作用域中又通过"$rootScope"对象添加了属性或方法,
+那么子级作用域将首先访问"$scope"对象,然后再访问"$rootScope"对象。
+    在子级作用域的视图模板中,当页面渲染"s_name"属性值时,首先,它在取值阶段,将在元素本身所属的作用域中寻找是否在该属性,如果不存在,
+则继续向上级作用域中查找,如果都没有找到,则直接在顶级的"$rootScope"对象中查找,确定属性的作用域之后,在进入计算值阶段,计算后,直接
+将获取的值渲染在页面的元素中。
+    需要说明的是,每个作用域都会自动添加一个类别名为"ng-scope"的CSS样式,因此,可以通过修改该样式,来显示各作用域所控制的范围区域。
+-->

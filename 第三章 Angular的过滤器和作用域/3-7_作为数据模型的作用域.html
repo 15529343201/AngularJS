@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_7">
+<head>
+    <meta charset="UTF-8">
+    <title>作为数据模型的作用域</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div ng-controller="c3_7">
+        <div><input type="text" ng-model="name" placeholder="请输入姓名"/> </div>
+        <div>{{name}}</div>
+    </div>
+    <script type="text/javascript">
+        var a3_7=angular.module('a3_7',[]);
+        a3_7.controller('c3_7',['$scope',function ($scope) {
+            $scope.name='';
+        }])
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在上述示例的源码中,先通过页面模块定义了一个名为"c3_7"的控制器,在控制器中引用$scope对象注册了一个名为"name"的属性,而$scope对象
+则通过注册的属性,控制了页面所需的数据模型,视图模板则通过双向绑定的方式传递并显示数据模型中的属性值。
+    接下来,分别从控制器和视图这两个角度来分析这个示例的具体流程。从控制器的角度来说,首先,通过$scope对象为"name"属性赋初始值;然后,
+通过$watch方法通知视图中的文本输入框元素数据已发生了变化,而文本框元素使用"ng-model"指令实现了数据的双向绑定。因此,它可以获悉该变化,
+并自动同步变化后的"name"属性值,且该值渲染至文本框中。
+    从视图的角度来说,由于文本框通过"ng-model"指令进行了数据的双向绑定,因此,先通过$scope对象获取控制器中'name'属性值;然后,如果用户
+在文本框中输入了新的内容,则会自动将该内容传递给控制器中的"name"属性,保持两端的数据同步。
+    此外,在<div>元素中使用双花括号的方式绑定"name"属性,该方式分为取值和计算两个阶段,在取值时,双花括号中的表达式将会根据$scope对象
+寻找所属的控制器,并在控制器中找到添加的"name"属性;取值后,在控制器中进行计算,并将结果返给$scope对象,视图模板中通过$scope获取最终值
+进行渲染,最终显示在页面的<div>元素中。
+-->

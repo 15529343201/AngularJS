@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_3">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type:none;
+            width:408px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul .odd{
+            color:#0026ff;
+        }
+        ul .even{
+            color:#ff0000;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:52px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .focus{
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c3_3">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>年龄</span>
+                <span>分数</span>
+            </li>
+            <li ng-repeat="stu in data|young:0" ng-class-odd="'odd'" ng-class-even="'even'">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var a3_3=angular.module('a3_3',[]);
+        a3_3.controller('c3_3',['$scope',function ($scope) {
+            $scope.bold="bold";
+            $scope.data=[
+                {name:"张明明",sex:"女",age:24,score:95},
+                {name:"李清思",sex:"女",age:27,score:87},
+                {name:"刘小华",sex:"男",age:28,score:86},
+                {name:"陈忠",sex:"男",age:23,score:97}
+            ];
+        }]);
+        a3_3.filter('young',function () {
+            return function (e,type) {
+                var _out=[];
+                var _sex=type?"男":"女";
+                for(var i=0;i<e.length;i++){
+                    if(e[i].age>22&&e[i].age<28&&e[i].sex==_sex)
+                        _out.push(e[i]);
+                }
+                return _out;
+            }
+        })
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的控制器代码中,为了实现开发需求,先通过页面模块"a3_3"调用"filter"方法,创建了一个名为"young"的自定义过滤器,该过滤器通过
+return语句返回一个函数。在函数体中,通过代码编写,实现对应需求的功能开发。接下来,我们重点分析一下这个返回的函数。
+    首先,在这个函数中,定义了两个形参"e"和"type",前者"e"参数在调用过滤器时,将会被需要过滤的数据自动注入。后者"type"参数,将会在调用
+过滤器时,通过冒号形式向过滤器传递实参。
+    其次,在函数体中,由于本示例过滤的是一个数组,因此,先定义一个名为"_out"的空数组,并将传来的"type"性别类型参数进行字符转化,保存在变量
+"_sex"中;然后,对自动注入的"e"数组中的数据进行遍历,在遍历过程中,检测各项元素的"年龄"属性值是否在"22-28"范围之间,并且"性别"属性值是否
+与变量"_sex"相符,如果这两项条件都满足,则将该项数组元素添加至空数组"_out"中,其核心代码如下所示。
+    ...省略部分代码
+    var _out=[];
+    var _sex=type?"男":"女";
+    for(var i=0;i<e.length;i++){
+        if(e[i].age>22&&e[i].age<28&&e[i].sex==_sex)
+            _out.push(e[i]);
+    }
+    return _out;
+    ...省略部分代码
+    最后,在函数体结束时,通过调用return语句,将包含符合过滤条件数据的数组"_out"返回给自定义过滤器"young"。当在视图模块中调用过滤器
+"young"时,将执行返回函数中大代码,并返回符合条件的数据,最终实现根据需求过滤数据的功能。
+-->

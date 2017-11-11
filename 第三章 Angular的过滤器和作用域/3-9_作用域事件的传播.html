@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_9">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域事件的传播</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--
+    1.服务(service)
+    通过在作用域间创建一个单例的服务,由该服务来处理各个作用域间的数据通信。
+    2.事件(event)
+    除使用服务外,还可以通过作用域间的事件进行数据通信,而要使用事件,则必须调用Angular中提供的两个方法$broadcasted和$emitted,方法
+$broadcasted的功能是将事件从父级作用域传播至子级作用域,它的调用格式如下。
+    $broadcast(eventname,data)
+    其中,参数eventname为定义的事件名称,data为事件传播过程中携带的数据信息。
+    方法$emitted的功能是将事件从子级作用域传播到父级作用域,它的调用格式如下。
+    $emitted(eventname,data)
+    此外,除这两个传播事件的方法外,还需要通过调用$on方法,在作用域中监控传播来的事件并获取相应的数据,它的调用格式。
+    $on(eventname,function(event,data){
+        //接收传播事件的处理代码
+    })
+    在上述调用格式中,eventname为需要监控的传播事件名称,event为事件传播过程中自带的特征,该特征包括下列几个重要的属性。
+    属性名称                             功能说明
+    event.targetScope                   返回发起传播事件的作用域名称
+    event.currentScope                  返回正在接受传播事件的作用域名称
+    event.name                          传播事件的名称
+    event.stopPropagation()             防止事件进行冒泡操作的函数
+    event.preventDefault()              阻止代码事件的发生
+    event.defaultPrevented              当执行了preventDefault()方法时,该属性值为name,否则为false
+    而在$on方法处理传播事件的函数中,另外一个data参数,则为事件在传播过程中携带的数据,通过该对象可以在各个监控的作用域中获取传播时的
+数据,实现数据通信的功能。
+    虽然说通过作用域的事件可以实现数据通信的功能,但是它们的传播范围非常有限,只能调用$broadcasted和$emitted这两个方法,在父和子级
+的作用域间进行传播,其他有这种关系的作用域将无法监控到传播来的事件。
+-->
+</head>
+<body>
+    <div ng-controller="c3_9_p">
+        <div ng-controller="c3_9_s">
+            <button ng-click="to_parent()">向父级传播</button>
+            <button ng-click="to_child()">向子级传播</button>
+            <div ng-controller="c3_9_c"></div>
+        </div>
+        <div ng-controller="c3_9_b"></div>
+    </div>
+    <script type="text/javascript">
+        var a3_9=angular.module('a3_9',[]);
+        a3_9.controller('c3_9_s',function ($scope) {
+            $scope.to_parent=function () {
+                $scope.$emit('event_1',"事件来源于子级");
+            }
+            $scope.to_child=function () {
+                $scope.$broadcast('event_2','事件来源于父级');
+            }
+        });
+        a3_9.controller('c3_9_p',function ($scope) {
+            $scope.$on('event_1',function (event,data) {
+                console.log('在父级中监听到',data);
+            })
+            $scope.$on('event_2',function (event,data) {
+                console.log('在父级中监听到',data);需要注意
+            });
+        });
+        a3_9.controller('c3_9_c',function ($scope) {
+            $scope.$on('event_1',function (event,data) {
+                console.log('在子级中监听到',data);
+            })
+            $scope.$on('event_2',function (event,data) {
+                console.log('在子级中监听到',data);
+            });
+        });
+        a3_9.controller('c3_9_b',function ($scope) {
+            $scope.$on('event_1',function (event,data) {
+                console.log('在同级中监听到',data);
+            })
+            $scope.$on('event_2',function (event,data) {
+                console.log('在同级中监听到',data);
+            });
+        });
+    </script>
+</body>
+</html>
+<!--源码分析
+    在本示例的代码中,定义了多个控制器,并通过ng-controller指令将它们与页面中的各个作用域相绑定,在其中名为"c3_9_s"的控制器中,添加了两个
+方法to_parent和to_child,分别用于单击页面中两个按钮时调用。
+    在to_parent方法中,直接调用Angular中的$emit方法,向父作用域传播"event_1"事件和"事件来源于子级"的字符串数据,而在to_child方法中,则是
+调用Angular中的$broadcast方法,向子作用域传播"event_2"事件和"事件来源于父级"的字符串数据;在其他的控制器中,则是通过调用$on方法接收
+其他作用域传播来的事件和数据,并将数据显示在浏览器控制台中。
+    虽然除"c3_9_s"的控制器外,都通过$on方法接收其他作用域传播来的事件和数据,但当用户在页面中单击第一个按钮时,只有父级作用域才接受到了
+子作用域传播来的"event_1"事件和相应字符串内容,其他作用域都没有接收到。因此,只在浏览器控制台中显示"在父级中监听到事件来源于子级"的字样。
+    当用户单击页面中的第二个按钮时,也只有在子级作用域才接受到了父级作用域传播来的"event_2"事件和相应字符串内容,其他作用域也都没有
+接收到,通过这个示例,我们清楚的看到,通过作用域中的事件传播数据的功能非常有限,只能调用Angular中的$emit和$broadcast方法,在父级和
+子级作用域进行事件数据的传递,这点在代码开发时需要注意。
+-->

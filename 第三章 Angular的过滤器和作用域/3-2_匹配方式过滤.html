@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_2">
+<head>
+    <meta charset="UTF-8">
+    <title>匹配(filter)方式过滤</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--
+    1.通过filter过滤器直接匹配包含字符参数的数据
+    {{数据|filter:'匹配字符'}}
+    {{data|filter:80}}
+    上述代码表示:在data数据的各个属性中,查找包含"80"内容的记录。
+    2.在字符参数中使用对象形式匹配指定属性的数据
+    {{数据|filter:对象}}
+    {{data|filter:{score:80}}}和{{data|filter:{$:80}}}
+    在上述代码中,前者仅是在"score"属性列中匹配值为80的数据记录,后者则是在全部属性列中匹配数据记录,后者相当于下列代码。
+    {{data|filter:80}}
+    3.在字符参数中使用自定义函数匹配相应数据
+    在filter过滤器的字符参数中,除使用对象外,还可以直接调用自定义的函数名,处理相对复杂的数据
+    {{数据|filter:函数名称}}
+    -->
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type:none;
+            width:408px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul .odd{
+            color:#0026ff;
+        }
+        ul .even{
+            color:#ff0000;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:52px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .focus{
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c3_2">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>年龄</span>
+                <span>分数</span>
+            </li>
+            <li ng-repeat="stu in data|filter:findscore" ng-class-odd="'odd'" ng-class-even="'even'">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var a3_2=angular.module('a3_2',[]);
+        a3_2.controller('c3_2',['$scope',function ($scope) {
+            $scope.bold="bold";
+            $scope.data=[
+                {name:"张明明",sex:"女",age:24,score:95},
+                {name:"李清思",sex:"女",age:27,score:87},
+                {name:"刘小华",sex:"男",age:28,score:86},
+                {name:"陈忠",sex:"男",age:23,score:97}
+            ];
+            $scope.findscore=function (e) {
+                return e.score>85 && e.score<90;
+            }
+        }]);
+    </script>
+</body>
+</html>
+    <!--源码分析:
+    在本示例的代码中,为了查找"分数"在85到90之间的数据,在示例的控制器代码中,先添加一个名为findscore的自定义函数,并在添加函数时,
+定义了一个名为"e"的形参,该形参的值为数据源对象;然后,根据这个数据源对象中的"score"属性值,通过逻辑运算符返回"分数"在85到90之间的记录数据。
+    最后,在本示例中的视图模板中,当通过filter过滤器匹配数据时,直接将findscore函数名作为过滤器的参数,此时,"data"对象已作为实参
+自动传递给findscore函数的形参"e"中,函数接收后,根据"data"对象中的"score"属性值,将"分数"在85到90之间的数据显示在视图的模板中。
+-->

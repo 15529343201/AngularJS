@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_5">
+<head>
+    <meta charset="UTF-8">
+    <title>字符查找</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type:none;
+            width:408px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul .odd{
+            color:#0026ff;
+        }
+        ul .even{
+            color:#ff0000;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:52px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .focus{
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c3_5">
+        <div><input id="txtkey" type="text" ng-model="key" placeholder="请输入姓名关键字"/>
+        </div>
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>年龄</span>
+                <span>分数</span>
+            </li>
+            <li ng-repeat="stu in data|filter:{name:key}">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var a3_5=angular.module('a3_5',[]);
+        a3_5.controller('c3_5',['$scope',function ($scope) {
+            $scope.bold="bold";
+            $scope.key='';
+            $scope.data=[
+                {name:"张明明",sex:"女",age:24,score:95},
+                {name:"李清思",sex:"女",age:27,score:87},
+                {name:"刘小华",sex:"男",age:28,score:86},
+                {name:"陈忠",sex:"男",age:23,score:97}
+            ];
+        }]);
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,为了实现列表中的数据根据文本框中输入的字符串内容自动进行过滤的功能,首先,在页面的控制器代码中添加一个名为"key"
+的属性,用于保存用户在文本框中输入的字符内容,该属性初始化时为空值。
+    然后,再通过"ng-repeat"指令显示数据时,调用Angular中的"filter"过滤器,并添加一个对象性字符参数,指定在数据对象的"name"属性中查找
+key值,即在"姓名"属性中查找文本框中输入的字符,如果找到,则显示在列表中,否则不显示任何数据。
+    最后,在页面的视图模板中,通过"ng-model"指令双向绑定控制器中的"key"属性。由于是双向绑定,因此,当用户在文本框中输入任意字符时,属性
+"key"的值将自动同步更新。由于该属性值又绑定了"filter"过滤器的参数,因此,列表中显示的数据也将自动更新,从而实现根据用户输入的内容,在列表
+的"姓名"属性值中查找并显示数据的功能。
+-->

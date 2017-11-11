@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a3_4">
+<head>
+    <meta charset="UTF-8">
+    <title>表头排序</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        ul{
+            list-style-type:none;
+            width:408px;
+            margin:0px;
+            padding:0px;
+        }
+        ul li{
+            float:left;
+            padding:5px 0px;
+        }
+        ul .odd{
+            color:#0026ff;
+        }
+        ul .even{
+            color:#ff0000;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul li span{
+            width:52px;
+            float:left;
+            padding:0px 10px;
+        }
+        ul .focus{
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c3_4">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span ng-click="title='name';desc=!desc">
+                    姓名
+                </span>
+                <span ng-click="title='sex';desc=!desc">
+                    性别
+                </span>
+                <span ng-click="title='age';desc=!desc">
+                    年龄
+                </span>
+                <span ng-click="title='score';desc=!desc">
+                    分数
+                </span>
+            </li>
+            <li ng-repeat="stu in data|orderBy:title:desc">
+                <span>{{$index+1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var a3_4=angular.module('a3_4',[]);
+        a3_4.controller('c3_4',['$scope',function ($scope) {
+            $scope.bold="bold";
+            $scope.title='name';
+            $scope.desc=0;
+            $scope.data=[
+                {name:"张明明",sex:"女",age:24,score:95},
+                {name:"李清思",sex:"女",age:27,score:87},
+                {name:"刘小华",sex:"男",age:28,score:86},
+                {name:"陈忠",sex:"男",age:23,score:97}
+            ];
+        }]);
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,为了实现单击表头排序的功能,首先,向页面控制器中添加"title"和"desc"属性,分别用于绑定排序时的属性名称和排序方向,
+并赋予初始值"name"和0,表示数据初始化时按"姓名"属性的升序排列,实现代码如下。
+    ...省略部分代码
+    $scope.title='name';
+    $scope.desc=0;
+    ...省略部分代码
+    然后,在页面的视图模板中,当通过ng-repeat指令复制并显示数据时,调用了"orderBy"过滤器,并带有两个参数,第一个冒号后的参数指定排序的属性
+名,第二个冒号后的参数指定排序时的方向,该参数默认或缺省时为升序,1为降序,0为升序。由于"title"和"desc"属性的初始值分别为"name"和0，
+因此,在页面初始化数据时,将按"姓名"属性的升序排列。
+    最后,在各个表头元素的单击(ng-click)事件中,分别对"title"和"desc"属性值进行重置。由于这两个值已与"orderBy"过滤器的两个参数绑定,
+因此,当这两个之发生变化时,自动改变数据显示时的排序属性名称和方向,最终实现按单击表头的属性排序的功能。
+-->
