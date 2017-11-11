@@ -41,3 +41,5 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-14.PNG)
 ### 2-15_表单中的select控件
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/2-15.PNG)
+### 3-1_排序方式过滤
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-1.PNG)
