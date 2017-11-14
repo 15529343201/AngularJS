@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a4_6">
+<head>
+    <meta charset="UTF-8">
+    <title>has和get方法</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--
+    injector.has(name)
+    在上述代码中,injector为获取的$injector对象,name为需要查找的服务名称。执行上述代码后,将返回一个布尔值,ture为找到名称对应的服务
+,false表示没有找到。
+    injector.get(name)
+    在上述代码中,injector为获取的$injector对象,name为需要返回实例的服务名称,执行上述代码后,将直接返回一个服务实例。
+    -->
+</head>
+<body>
+    <div ng-controller="c4_6">
+        <!--视图组件-->
+    </div>
+    <script type="text/javascript">
+        var a4_6=angular.module('a4_6',[])
+            .factory('$custom',function () {
+                return {
+                    print: function (msg) {
+                        console.log(msg);
+                    }
+                };
+            });
+        var injector=angular.injector(['a4_6','ng']);
+        var has=injector.has('$custom');
+        console.log(has);
+        if(has){
+            var custom=injector.get('$custom');
+            custom.print("控制台输出任意的内容!");
+        }
+        a4_6.controller('c4_6',['$scope','$custom',
+        function ($scope,$custom) {
+            //控制器代码
+        }]);
+    </script>
+
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,当调用has方法检测注册列表中是否含有名为"$custom"的服务时,在浏览器的控制台中,输出来的结果为true,表示服务注册
+列表中包含名为"$custom"的服务,这是由于在开始检测服务之前,我们就已经定义了一个名为"$custom"的服务。
+    假如将"$custom"服务名修改成其他未定义的名称,那么,在浏览器的控制台将输出false,表示has方法没有找到对应名称的服务。
+    最后,如果找到了指定的服务名,那么,在调用get方法获取指定服务名称的实例对象。既然是实例对象,就可以直接调用对象中的方法,因此,通过调用
+对象中包含的"print"方法,在浏览器的控制台中输出"控制台输出任意的内容!"字样。
+-->

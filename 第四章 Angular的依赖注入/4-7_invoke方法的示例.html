@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a4_7">
+<head>
+    <meta charset="UTF-8">
+    <title>invoke方法的示例</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div ng-controller="c4_7">
+        <!--视图组件-->
+    </div>
+    <script type="text/javascript">
+        var a4_7=angular.module('a4_7',[])
+            .factory('$custom',function () {
+                return {
+                    print: function (msg) {
+                        console.log(msg);
+                    }
+                };
+            });
+        var injector=angular.injector(['a4_7','ng']);
+        var fun=function ($custom) {
+            $custom.print("函数执行成功!");
+        }
+        injector.invoke(fun);
+        a4_7.controller('c4_7',['$scope','$custom',
+            function ($scope,$custom) {
+                //控制器代码
+            }]);
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,除使用factory方法定义一个名为"$custom"的服务之外,还自定义了一个名为fun的函数,并在这个函数中注入"$custom"服务,
+在调用服务中的"print"方法,向浏览器的控制台输出"函数执行成功!"的字样。
+    为了能执行这个自定义的函数fun,我们调用$injector中的invoke方法,该方法的功能不仅执行名称对应的函数代码,而且还能返回被执行函数
+返回的值,而在示例中,仅是执行fun函数,将设置的内容显示在浏览器的控制台中。
+-->

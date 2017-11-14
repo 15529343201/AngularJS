@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a4_2">
+<head>
+    <meta charset="UTF-8">
+    <title>简单依赖注入的示例</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body{
+            font-size:12px;
+        }
+        .show{
+            border:solid 1px #ccc;
+            padding:8px;
+            width:260px;
+            margin:10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="c4_2">
+        <div class="{{cls}}">{{text}}</div>
+        <button ng-click="onClick(1)">早上</button>
+        <button ng-click="onClick(2)">上午</button>
+        <button ng-click="onClick(3)">下午</button>
+        <button ng-click="onClick(4)">晚上</button>
+    </div>
+    <script type="text/javascript">
+        var a4_2=angular.module('a4_2',[]);
+        a4_2.config(function ($provide) {
+            $provide.provider('show_1',function () {
+                this.$get=function () {
+                    return {
+                        val:function (name) {
+                            return name;
+                        }
+                    }
+                }
+            });
+        });
+        a4_2.config(function ($provide) {
+            $provide.factory('show_2',function () {
+                return {
+                    val:function (name) {
+                        return name;
+                    }
+                }
+            });
+        });
+        a4_2.config(function ($provide) {
+            $provide.value('show_3',function (name) {
+                return name;
+            });
+        });
+        a4_2.config(function ($provide) {
+            $provide.service('show_4',function () {
+                return {
+                    val:function (name) {
+                        return name;
+                    }
+                }
+            });
+        });
+        a4_2.controller('c4_2',function ($scope,show_1,show_2,show_3,show_4) {
+            $scope.cls="";
+            $scope.onClick=function (t) {
+                $scope.cls="show";
+                switch(t){
+                    case 1:
+                        $scope.text=show_1.val("早上好!");
+                        break;
+                    case 2:
+                        $scope.text=show_2.val("上午好!");
+                        break;
+                    case 3:
+                        $scope.text=show_3("下午好!");
+                        break;
+                    case 4:
+                        $scope.text=show_4.val("晚上好!");
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,先通过$provide服务中的provider(),factory(),value(),service()方法分别在模块中定义名称为"show_1","show_2"
+,"show_3"和"show_4"的可注入型变量,而这些变量又分别对应一个函数,这些函数的功能都是相同的,即返回用户输入的字符内容。
+    然后,在定义模板中控制器代码时,将这些定义好的变量全部作为依赖注入变量来使用。当页面在解析这段代码时,Angular将启动$provide服务,
+并返回多个与服务一一对应的实例,通过实例分别处理这些注入变量对应的函数功能。但对于开发者来说,只要注入变量就可以。
+    最后,在控制器代码中定义一个绑定页面按钮的onClick函数,并在该函数中添加一个"t"参数,用于区分不同的按钮,程序根据该参数的值,调用
+不同的依赖注入变量对应的方法,因此,当单击页面中不同按钮时,传来不同实参"t"的值,并将处理后的函数内容显示在页面中。
+-->
