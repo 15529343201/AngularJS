@@ -59,3 +59,17 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-8.PNG)
 ### 3-9_作用域事件的传播
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/3-9.PNG)
+### 4-1_依赖注入的原理
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-1.PNG)
+### 4-2_简单依赖注入的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-2.PNG)
+### 4-3_推断式注入的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-3.PNG)
+### 4-4_标记式注入的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-4.PNG)
+### 4-5_行内式注入的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-5.PNG)
+### 4-6_has和get方法的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-6.PNG)
+### 4-7_invoke方法的示例
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-7.PNG)
