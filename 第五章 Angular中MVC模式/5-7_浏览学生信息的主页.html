@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="a5_7">
+<head>
+    <meta charset="UTF-8">
+    <title>在切换视图模板时传参数</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/angular-route.min.js"></script>
+    <style type="text/css">
+        body{
+            font-size:13px;
+        }
+        .show{
+            background-color: #ccc;
+            padding:8px;
+            width:260px;
+            margin:10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-view></div>
+<script type="text/javascript">
+    var a5_7 = angular.module('a5_7', ['ngRoute']);
+    a5_7.controller('c5_7_1', ['$scope', function ($scope) {
+        $scope.students = students;
+    }]);
+    a5_7.controller('c5_7_2', function ($scope, $routeParams) {
+        for (var i = 0; i < students.length; i++) {
+            if (students[i].stuId == $routeParams.id) {
+                $scope.student = students[i];
+                break;
+            }
+        }
+    });
+    a5_7.config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controller: 'c5_7_1',
+                templateUrl: "5-7-1.html"
+            })
+            .when('/view/:id', {
+                controller: 'c5_7_2',
+                templateUrl: "5-7-2.html",
+                publicAccess: true
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    }]);
+    var students = [
+        { stuId: 1000, name: "张明明", sex: "女", score: 60 },
+        { stuId: 1001, name: "李清思", sex: "女", score: 80 },
+        { stuId: 1002, name: "刘小华", sex: "男", score: 90 },
+        { stuId: 1003, name: "陈忠忠", sex: "男", score: 70 }
+    ];
+</script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,为了实现由不同的页面模板分割不同功能,并按指定的路由进行加载的目的,首先,创建3个页面,分别实现不同的功能模板。
+其中,"5-7.html"为主页面,用于创建一个布局模板,并通过ng-view指令绑定其他视图模板显示的元素,代码如下。
+    <div ng-view></div>
+    上述代码表示,其他相关的子类视图模板将显示在这个<div>元素中。
+    然后,添加两个用于绑定子类视图模板的控制器a5_7_1和a5_7_2,前者用于以列表的方式显示全部学生的姓名,后者用于根据传回的学生ID号获取
+对应学生的全部信息,核心代码如下。
+    for (var i = 0; i < students.length; i++) {
+        if (students[i].stuId == $routeParams.id) {
+            $scope.student = students[i];
+            break;
+        }
+    }
+    在上述代码中,当通过地址栏传递学生ID时,该ID号将被保存在$routeParams服务的id号中。因此,为了根据传来的ID号,并在学生数据中找到
+对应的数据信息,先遍历学生数据。在遍历过程中,当某项学生的stuId值和$routeParams.id相等时,则将对应学生的全部数据信息赋值给模型的
+student属性,被绑定的视图模板将调用该属性,显示全部的学生信息。
+    最后,在调用$routeProvider服务设置路由传递参数时,将路由的地址格式设置为"/view/:id"。因此,为了满足这种路由的格式,在列表中单击
+某学生"姓名"时,添加如下代码。
+     <a href="#view/{{stu.stuId}}">{{stu.name}}</a>
+    上述代码定义的路由连接符合$routeProvider服务通过when函数设置的格式,因此,当单击上述链接时,将直接调用5-7-2.html页面模板,并
+将名为c5_7_2的控制器绑定该模板,从而实现根据传递的学生ID号,显示全部数据的功能。
+-->
