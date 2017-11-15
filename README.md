@@ -73,3 +73,11 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-6.PNG)
 ### 4-7_invoke方法的示例
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/4-7.PNG)
+### 5-1_Model组件的基础概念
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-1.PNG)
+### 5-2_使用ngRepeater方法遍历Model对象
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-2.PNG)
+### 5-3_控制器的属性和方法
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-3.PNG)
+### 5-4_控制器方法中的参数
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-4.PNG)
