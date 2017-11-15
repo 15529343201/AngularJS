@@ -81,3 +81,9 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-3.PNG)
 ### 5-4_控制器方法中的参数
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-4.PNG)
+### 5-5_控制器中属性和方法的继承
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-5.PNG)
+### 5-6_View组件中的模板切换
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-6.PNG)
+### 5-7_浏览学生信息的主页
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-7.PNG)
