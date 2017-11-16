@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="a6_6">
+<head>
+    <title>添加自定义服务依赖项的方法</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--
+    (1)隐式声明
+    所谓隐式声明,指的是在创建服务的函数中,直接在参数中调用,不进行任何声明。采用这种方式,如果代码进行压缩时,注入的对象有可能丢失,
+代码如下所示。
+    app.factory('ServiceName',function(dep1,dep2){});
+    (2)调用$inject属性
+    可以将需要注入服务的各种对象名包装成一个数组,并将它作为$inject属性值,但这种方式因为执行的效率很低,因此,不推荐使用,
+代码如下所示.
+    var sf=function(dep1,dep2){};
+    sf.$inject=['dep1','dep2'];
+    app.factory('ServiceName',sf);
+    在上述代码中,sf表示服务执行的函数,将该函数的$inject属性值设置成为依赖注入的对象名称,当使用创建服务方法时,属性值对应的数组
+将随函数一起注入服务中。
+    (3)显式声明
+    所谓显式声明,指的是在创建服务的函数中,添加一个数组,在数组中按顺序声明需要注入的服务或对象名称,这种方式既高效,又不会丢失代码,
+推荐使用,代码如下。
+    app.factory('ServiceName',['dep1','dep2',function(dep1,dep2){}]);
+    -->
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="c6_6">
+    <div class="show">您选择的是：{{result}}</div>
+    <button ng-click="confirm('你真的要删除这条记录吗？')">
+        删除
+    </button>
+</div>
+<script type="text/javascript">
+    angular.module('a6_6', [])
+        .service('$notify', ['$window', function ($win) {
+            return function (msg) {
+                return $win.confirm(msg) ? "确定" : "取消";
+            }
+        }])
+        .controller('c6_6', ['$scope', '$notify',
+            function ($scope, $notify) {
+                $scope.confirm = function (msg) {
+                    $scope.result = $notify(msg);
+                };
+            }]);
+</script>
+</body>
+</html>
+<!--源码分析
+    在本示例的代码中,先调用模块的service方法,此处也可以调用factory方法创建一个名为"$notity"的服务。由于该服务需要弹出一个
+带有"确定"和"取消"按钮的询问框,因此,需要在服务中注入一个window对象。
+    注入window对象的方式是显示声明,即在创建服务的函数中添加了一个数组,在数组中指明需要注入的对象为"$window",与数组中
+这个指明的对象相对应的是函数中的"$win"参数,它们之间名称可以不一样,但对应的顺序必须一样。因此,函数中的"$win"参数就是被注入的
+"$window"对象,调用该对象中的confirm方法,根据单击按钮的不同返回相应的字符信息。
+    需要说明的是,当在控制器中采用显式声明方式添加依赖项时,与添加服务的依赖项相关,通过添加数组,并保持数组中对象的顺序与函数中
+参数的顺序一致,即数组中的'$socpe'和'$notity'名称与函数中的$scope和$notity是一一对应的,否则,将会出现异常。
+-->

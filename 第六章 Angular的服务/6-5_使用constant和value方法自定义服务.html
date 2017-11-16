@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="a6_5">
+<head>
+    <title>使用constant和value方法自定义服务</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <!--
+    constant方法调用格式为:
+    app.constant(name,value)
+    在上述代码中,app为已构建的模型变量,参数name表示创建服务的名称,value是一个常量,表示与服务名对应的常量值或对象,
+    当注入服务后,可以直接调用服务名对应的常量。
+    value方法调用格式为:
+    app.value(name,value)
+    -->
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="c6_5">
+    <div class="show">图书ISBN号：{{BOOK}}</div>
+    <div class="show">美元兑换价：{{USD}}</div>
+</div>
+<script type="text/javascript">
+    angular.module('a6_5', [])
+        .constant('$ISBN', {
+            BOOK: "978745432345"
+        })
+        .value('$RATE', {
+            USD: 614.28
+        })
+        .controller('c6_5', function ($scope, $ISBN, $RATE) {
+            var n = 600;
+            angular.extend($RATE, { USD: n });
+            $scope.BOOK = $ISBN.BOOK;
+            $scope.USD = $RATE.USD;
+        });
+</script>
+</body>
+</html>
+<!--源码分析:
+    在本示例的代码中,先分别调用了模块对象的constant和value方法,创建了两个名为"$ISBN"和"$RATE"的服务。由于这两个服务返回的都是
+常量,因此,在控制器中注入两个服务后,同样也实例化成一个服务对象,以对象属性的方式获取常量值。还可以使用angular.extend方法对服务
+对象中的常量值进行重置,页面中显示的"600"就是重置后的值。
+    虽然使用constant和value方法创建的服务常用于返回常量,并且在注入控制器后,都可以通过angular.extend方法进行重置,但它们两者
+之间还是有区别的。最重要的区别是:使用constant方法创建服务返回的常量可以被注入配置函数(config)中,而使用value方法创建服务返回
+的值则不能注入。根据这一现象,constant方法常用于创建配置数据,而value方法则常用于创建对象和函数。这两个方法与之前章节介绍的
+factory,service方法在大部分功能上是可以替换的。
+-->

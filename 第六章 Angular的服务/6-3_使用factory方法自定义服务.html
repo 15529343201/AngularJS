@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="a6_3">
+<head>
+    <title>使用factory方法自定义服务</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="c6_3">
+    <div class="show">{{str('我是服务返回的内容')}}</div>
+    <div class="show">{{name(1)}}</div>
+</div>
+<script type="text/javascript">
+    angular.module('a6_3', [])
+        .factory('$outfun', function () {
+            return {
+                str: function (s) {
+                    return s;
+                }
+            };
+        })
+        .factory('$outarr', function () {
+            return ['张三', '李四', '王二']
+        })
+        .controller('c6_3', function ($scope, $outfun, $outarr) {
+            $scope.str = function (n) {
+                return $outfun.str(n);
+            }
+            $scope.name = function (n) {
+                return $outarr[n];
+            }
+        });
+</script>
+</body>
+</html>
+<!--源码分析
+    在本示例的代码中,首先,分别调用模块的factory方法,创建了名称分别为"$outfun"和"$outarr"的服务,前者将返回一个名为str的函数,
+它的值是用户调用该函数时,输入的任意字符内容;后者将直接返回一个包含"姓名"内容的数组。
+    控制器通过隐式方式注入两个新创建的服务之后,可以在代码层中以服务对象的方式访问这两项服务。先将"$outfun"服务返回的函数值赋予名
+为"str"的模型属性,通过该属性与视图模板绑定,显示用户调用服务后输入的任意内容。再将"$outarr"服务返回的数组赋予名为"name"的模型属性,
+通过动态传递索引号n,获取对应数组中的内容,并显示在页面中。
+-->

@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="a6_4">
+<head>
+    <title>使用service方法自定义服务</title>
+    <script src="../js/angular.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="c6_4">
+    <div class="show">姓名：{{name}}</div>
+    <div class="show">邮件：{{email}}</div>
+    <div class="show">{{title}}</div>
+    <button ng-click="say()">主题</button>
+</div>
+<script type="text/javascript">
+    angular.module('a6_4', [])
+        .service('$student', function () {
+            this.name = "陶国荣";
+            this.email = "tao_guo_rong@163.com";
+            this.say = function () {
+                return "hello,angular!";
+            }
+        })
+        .controller('c6_4', function ($scope, $student) {
+            $scope.name = $student.name;
+            $scope.email = $student.email;
+            $scope.say = function () {
+                $scope.title = $student.say();
+            }
+        });
+</script>
+</body>
+</html>
+<!--源码分析
+    在本示例的代码中,先调用模块的service方法创建了一个名为"$student"的服务。因为使用service方法可以返回构造函数,因此,在这个
+服务返回的函数中,能通过this方式添加了两个属性和一个名为say的方法,用于注入服务时的回调。
+    然后,在控制器中代码中,通过依赖注入的方式添加名为"$student"的服务。在注入过程中,Angular检测到是service创建的服务,会自动
+通过关键字new来实例化这个服务,生成服务对象,因此,在控制器中能通过这个服务对象访问函数中的属性和方法。
+    需要说明的是,通过factory方法创建的服务代码,完全可以使用service方法来代替,但如果是service方法创建的服务,使用factory方法
+代替时,需要先将service方法中回调函数单独创建为一个自定义的函数,再在factory方法的回调函数中使用关键字new实例化这个自定义的函数,
+并返回实例化后的对象。下列这两段代码是等价的。
+    service方法:
+    angular.module('a6_4', [])
+        .service('$student', function () {
+            this.name = "陶国荣";
+            this.email = "tao_guo_rong@163.com";
+            this.say = function () {
+                return "hello,angular!";
+            }
+    })
+    factory方法:
+    function student(){
+        this.name="陶国荣";
+        this.email="tao_guo_rong@163.com";
+        this.say=function(){
+            return "hello,angular!";
+        }
+    }
+    angular.module('a6_4',[]){
+        .factory('$student',function() {
+            return new student();
+        }
+    }
+-->
