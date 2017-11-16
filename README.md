@@ -87,3 +87,21 @@
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-6.PNG)
 ### 5-7_浏览学生信息的主页
 ![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/5-7.PNG)
+### 6-1_内置服务调用
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-1.PNG)
+### 6-2_使用$provide自定义服务
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-2.PNG)
+### 6-3_使用factory方法自定义服务
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-3.PNG)
+### 6-4_使用service方法自定义服务
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-4.PNG)
+### 6-5_使用constant和value方法自定义服务
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-5.PNG)
+### 6-6_添加自定义服务或依赖项方法
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-6.PNG)
+### 6-7_嵌套注入服务
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-7.PNG)
+### 6-8_服务的装饰器
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-8.PNG)
+### 6-9_服务的多例性
+![image](https://github.com/15529343201/AngularJS/blob/master/%E5%9B%BE%E7%89%87/6-9.PNG)
